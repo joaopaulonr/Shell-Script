@@ -1,0 +1,11 @@
+Data de Entrega: 10/09/2022
+Valor: 1,0 ponto na Primeira nota.
+
+Considere o arquivo auth.log. Crie um arquivo logins.sh e o coloque na pasta atividades/atividade03 do seu repositório. Nele devem existir os comandos abaixo, um por linha:
+
+    Um comando grep que encontre todas as linhas com mensagens que não são do sshd.
+    Um comando grep que encontre todas as linhas com mensagens que indicam um login de sucesso via sshd cujo nome do usuário começa com a letra j.
+    Um comando grep que encontre todas as vezes que alguém tentou fazer login via root através do sshd.
+    Um comando grep que encontre todas as vezes que alguém conseguiu fazer login com sucesso nos dias 11 ou 12 de Outubro.
+
+Só é permitido usar um único comando grep para cada item acima, sem pipes ou redirecionamentos de entrada e saída.
