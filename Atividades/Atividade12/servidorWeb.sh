@@ -21,7 +21,7 @@ InstanceId=$(grep "InstanceId" aux.txt | tr -d '"' | tr -d ','  | cut -d ":" -f2
 #Pegando-IP-público-a-partir-da-variável-InstanceId.
 IPPUB=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicIpAddress" --instance-id ${InstanceId} --output text)
 #Contador-de-segundos-para-a-configuração-do-servidor-WEB.
-for ((i = 65; i >= 1; i--)) do
+for ((i = 69; i >= 1; i--)) do
 clear
 echo "Espere alguns segundos para a inicialização do servidor." 
 echo "Finalizando em ${i}s."
