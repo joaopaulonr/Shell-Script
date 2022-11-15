@@ -21,4 +21,3 @@ InstanceId=$(grep "InstanceId" aux.txt | tr -d '"' | tr -d ','  | cut -d ":" -f2
 IPPUB=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicIpAddress" --instance-id ${InstanceId} --output text)
 #Echo-do-limk-de-acesso.
 echo "Acesse: http://${IPPUB}/"
-rm -f auxt.txt
