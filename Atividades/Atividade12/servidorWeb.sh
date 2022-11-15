@@ -9,8 +9,9 @@ VPCID=$(aws ec2 describe-vpcs --query "Vpcs[].VpcId" --output text)
 SUBNET=$(aws ec2 describe-subnets --query "Subnets[].SubnetId[]" --output text | tr "\t" "," | tr "," "\n" | sed '2,6d')
 #Criação-do-grupo-de-segurança.
 aws ec2 create-security-group --group-name Script-group --description "Meu grupo de seguranca" --vpc-id ${VPCID} > /dev/null
-#Criação-das-regras-do-grupo.
+#Pegando-o-ID-do-grudo-de-segurança.
 SECGRUPID=$(aws ec2 describe-security-groups --group-names  "Script-group" --query "SecurityGroups[].GroupId[]" --output text)
+#Criação-das-regras-do-grupo.
 aws ec2 authorize-security-group-ingress --group-id ${SECGRUPID} --protocol tcp --port 22 --cidr 0.0.0.0/0 > /dev/null
 aws ec2 authorize-security-group-ingress --group-id ${SECGRUPID} --protocol tcp --port 80 --cidr 0.0.0.0/0 > /dev/null
 #Criação-da-instância.
