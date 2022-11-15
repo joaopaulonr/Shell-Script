@@ -1,0 +1,21 @@
+Atividade 12
+Data de Entrega: 19/11/2022
+Valor: 2,5 pontos na terceira nota.
+Crie uma pasta chamada atividades/atividade12 e coloque os arquivos da atividade nela.
+Questão Única - 2,5 Pontos
+Você deve fazer um script chamado servidorWeb.sh que ao ser executado, cria uma instância na AWS e carrega um servidor web com uma página contendo seu nome e matrícula.
+Exemplo da execução:
+
+$ ./servidorWeb.sh nomedachave
+Criando servidor...
+Acesse: http://84.74.123.45/                 
+
+Ao colocar o endereço retornado pelo script no navegador, a página deve ser exibida.
+Observe que a única informação que o usuário deve fornecer é o nome da chave, criada previamente. O script deve funcionar em qualquer conta da AWS na região us-east-1. Observe os seguintes pontos:
+
+    Você pode anotar no script o ID da AMI (imagem) do Ubuntu Linux, que é o mesmo para todos os usuários.
+    Recupere a subrede do VPC padrão.
+    Crie um grupo de segurança liberando a porta 22 e 80, TCP.
+    Crie a instância.           
+
+Para ajudar, consulte a documentação da linha de comando linha de comando e o tutorial de como utilizá-la.
