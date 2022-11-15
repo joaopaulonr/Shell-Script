@@ -23,9 +23,16 @@ IPPUB=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicIpA
 #Contador-de-segundos-para-a-configuração-do-servidor-WEB.
 for ((i = 65; i >= 1; i--)) do
 clear
+echo "Espere alguns segundos para a inicialização do servidor." 
+echo "Finalizando em ${i}s."
+sleep 0.5
+clear
+echo "Espere alguns segundos para a inicialização do servidor.." 
+echo "Finalizando em ${i}s.."
+sleep 0.5
+clear
 echo "Espere alguns segundos para a inicialização do servidor..." 
 echo "Finalizando em ${i}s..."
-sleep 1
 done
 clear
 #Echo-do-link-de-acesso.
