@@ -15,10 +15,18 @@ SECGRUPID=$(aws ec2 describe-security-groups --group-names  "Script-group" --que
 aws ec2 authorize-security-group-ingress --group-id ${SECGRUPID} --protocol tcp --port 22 --cidr 0.0.0.0/0 > /dev/null
 aws ec2 authorize-security-group-ingress --group-id ${SECGRUPID} --protocol tcp --port 80 --cidr 0.0.0.0/0 > /dev/null
 #Criação-da-instância.
-aws ec2 run-instances --image-id ${ISO} --instance-type t2.micro --key-name vockey --subnet-id ${SUBNET} --security-group-ids ${SECGRUPID} --user-data file://apache.sh >> aux.txt
+aws ec2 run-instances --image-id ${ISO} --instance-type t2.micro --key-name ${KEY} --subnet-id ${SUBNET} --security-group-ids ${SECGRUPID} --user-data file://apache.sh >> aux.txt
 #Pegando-o-ID-da-instância-em-tempo-de-execução.
 InstanceId=$(grep "InstanceId" aux.txt | tr -d '"' | tr -d ','  | cut -d ":" -f2)
 #Pegando-IP-público-a-partir-da-variável-InstanceId.
 IPPUB=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicIpAddress" --instance-id ${InstanceId} --output text)
-#Echo-do-limk-de-acesso.
+#Contador-de-segundos-para-a-configuração-do-servidor-WEB.
+for ((i = 65; i >= 1; i--)) do
+clear
+echo "Espere alguns segundos para a inicialização do servidor..." 
+echo "Finalizando em ${i}s..."
+sleep 1
+done
+clear
+#Echo-do-link-de-acesso.
 echo "Acesse: http://${IPPUB}/"
