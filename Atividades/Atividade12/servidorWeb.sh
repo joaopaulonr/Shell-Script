@@ -35,5 +35,6 @@ echo "Espere alguns segundos para a inicialização do servidor..."
 echo "Finalizando em ${i}s..."
 done
 clear
+rm -f aux.txt
 #Echo-do-link-de-acesso.
 echo "Acesse: http://${IPPUB}/"
