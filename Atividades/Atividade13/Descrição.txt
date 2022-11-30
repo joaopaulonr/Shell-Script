@@ -1,0 +1,45 @@
+Atividade 13
+Data de Entrega: 03/12/2022
+Valor: 2,5 pontos na terceira nota.Questão Única - 2,5 PontosO nome do script principal da atividade deve ser instanciaServico.sh.
+Esta atividade tem duas partes: treinamento e produção. Só a parte produção será corrigida. O treinamento é para preparar o terreno.Treinamento
+Considere o script a seguir:
+
+#!/bin/bash
+
+while true
+do
+   DATA=$(date +%H:%M:%S-%D)
+   echo "$DATA Servidor Ativo" >> /var/log/mensagens.log
+   sleep 5
+done                                       
+
+Crie uma instância através do console da AWS e configure um serviço SystemD para executar esse script. Inicie o script sem reiniciar a instância para ter certeza que ele executa corretamente. Depois, certifique-se que o serviço funciona mesmo após a instância ser reiniciada.Produção
+Até este ponto, você deve ter entendido que um script com um laço dentro é iniciado pelo SystemD e se mantém em execução. Agora vamos para o que o instanciaServico.sh deve fazer.
+A execução deve ser igual a atividade anterior, mantendo a chave caso o professor deseje entrar na instância durante a correção:
+
+$ ./instanciaServico.sh nomedachave
+Criando servidor de Monitoramento...
+Acesse: http://84.74.123.45/                 
+
+Seu script além de criar a máquina virtual, deve instalar um serviço nela que de 5 em 5 segundos colete informações do estado da máquina e exiba o resultado na página index.
+
+    O horário e data da coleta de informações.
+    Tempo que a máquina está ativa.
+    Carga média do sistema.
+    Quantidade de memória livre e ocupada.
+    Quantidade de bytes recebidos e enviados através da interface eth0.
+
+Todas essas informações já foram assunto de atividade anterior, menos a última, que pode ser obtida lendo o arquivo /proc/net/dev. Lembre-se que você pode usar o comando cat e o operador << para fazer com que um script crie outro script ou arquivo de texto qualquer:
+
+cat << EOF > script.sh
+#!/bin/bash
+while true
+do
+   DATA=$(date +%H:%M:%S-%D)
+   echo "$DATA Servidor Ativo" >> /var/log/mensagens.log
+   sleep 5
+done    
+EOF               
+                        
+
+Você não precisa fazer um HTML complicado, só tente organizar as informações em uma tabela ou lista. Não é para simplesmente jogar a saída dos comandos para o arquivo.
