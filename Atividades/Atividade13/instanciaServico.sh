@@ -1,4 +1,5 @@
 #!/bin/bash
+#Código reutilizado da questão 12.
 #Parâmetro-para-a-inserção-da-chave-de-acesso.
 KEY=$1 
 echo "Criando o servidor de monitoramento..."

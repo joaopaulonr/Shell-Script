@@ -1,7 +1,9 @@
 #!/bin/bash
+#instalação do APACHE2 e definição da TIMEZONE para fortaleza.
 sudo apt update > /dev/null
 sudo timedatectl set-timezone America/Fortaleza
 sudo apt install -y apache2 > /dev/null
+#Criação do SCRIPT para a coleta de informações.
 cat <<EOF > dados.sh
 #!/bin/bash
 while true
@@ -26,7 +28,7 @@ EOF
 
 mv dados.sh /home/ubuntu/
 chmod +x /home/ubuntu/dados.sh
-
+#Criação do serviço.
 cat<<EOF2 > dados.service
 [Unit]
 Description=WebData - Serviço Web de informações da instância.
@@ -40,7 +42,7 @@ ExecStart=/home/ubuntu/dados.sh
 [Install]
 WantedBy=multi-user.target
 EOF2
-
+#Inicialização do serviço.
 mv dados.service /etc/systemd/system
 systemctl enable dados.service
 systemctl start dados.service
