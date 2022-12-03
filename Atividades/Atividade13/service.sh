@@ -10,6 +10,8 @@ echo "Informacoes coletadas em: [\$(date '+%d/%m/%Y %T')]." >> index.html
 echo "<br>" >> index.html
 echo "Tempo ativo: \$(uptime -p | cut -d " " -f2) minutos." >> index.html
 echo "<br>" >> index.html
+echo "Carga media do sistema: \$(uptime | cut -d" " -f12 | tr ',' ' ')" >> index.html
+echo "<br>" >> index.html
 echo "Memoria livre: \$(free -m | sed 1d | sed 2d | tr -s '[:space:]' ',' | cut -d ',' -f4) MB." >> index.html
 echo "<br>" >> index.html
 echo "Memoria Usada: \$(free -m | sed 1d | sed 2d | tr -s '[:space:]' ',' | cut -d ',' -f3) MB." >> index.html

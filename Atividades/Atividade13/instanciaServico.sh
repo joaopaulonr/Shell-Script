@@ -1,7 +1,7 @@
 #!/bin/bash
 #Parâmetro-para-a-inserção-da-chave-de-acesso.
 KEY=$1 
-echo "Criando o servidor..."
+echo "Criando o servidor de monitoramento..."
 #Variáveis-com-comandos-utilizados-no-script.
 ISO="ami-052efd3df9dad4825"
 VPCID=$(aws ec2 describe-vpcs --query "Vpcs[].VpcId" --output text)
