@@ -1,0 +1,67 @@
+Atividade 14
+Data de Entrega: 10/12/2022
+Valor: 5 pontos na terceira nota.Questão 01 - 2,5 PontosO nome do script principal desta atividade é criarDuasInstancias.sh.
+Nesta questão, você deve começar criando um grupo de segurança com as seguintes características:
+
+    Aceitar conexões SSH (22/tcp) apenas a partir do IP visível da máquina que está executando o script.
+    Aceitar conexões HTTP (80/tcp) a partir da Internet.
+    Aceitar conexões MySQL (3306/tcp) a partir de outras máquinas no mesmo grupo de segurança.
+
+Com o grupo de segurança criado, o script deve criar uma primeira máquina virtual e realizar as seguintes ações:
+
+    Instalar o servidor MySQL.
+    Habilitar o acesso por todas as interfaces de rede da máquina.
+    Criar um banco de dados chamado scripts, usando usuário e senha para acesso remoto.
+
+Em seguida, informar na tela o IP Privado. Essa informação também é usada na próxima etapa.
+O script deve partir então para criar uma segunda instância. As seguintes ações devem ser realizadas na criação desse novo servidor:
+
+    Os pacotes cliente do MySQL deve ser instalados.
+    Uma conexão deve ser feita no servidor da primeira máquina.
+    No banco scripts, criar uma tabela chamada Teste com apenas um campo chamado atividade do tipo inteiro.
+
+A correção será feita pelo login do professor na segunda máquina, em seguida de conexão manual ao banco e verificação se a tabela foi de fato criada.
+Abaixo, um exemplo da invocação e saídas produzidas.
+
+$ ./criarDuasInstancias.sh nomedachave usuario senha
+Criando servidor de Banco de Dados...
+IP Privado do Banco de Dados: 172.31.64.108
+
+Criando servidor de Aplicação...
+IP Público do Servidor de Aplicação: 100.25.42.191                 
+
+Questão 02 - 2,5 PontosO nome do script principal desta atividade é wordpress.sh.
+O objetivo é criar um script que faça uma instalação do WordPress com o banco de dados e o servidor web executando em instâncias diferentes.
+Como na atividade anterior, você deve começar criando um grupo de segurança com as seguintes características:
+
+    Aceitar conexões SSH (22/tcp) apenas a partir do IP visível da máquina que está executando o script.
+    Aceitar conexões HTTP (80/tcp) a partir da Internet.
+    Aceitar conexões MySQL (3306/tcp) a partir de outras máquinas no mesmo grupo de segurança.
+
+A primeira parte é idêntica, o script deve criar uma primeira máquina virtual e realizar as seguintes ações:
+
+    Instalar o servidor MySQL.
+    Habilitar o acesso por todas as interfaces de rede da máquina.
+    Criar um banco de dados chamado scripts, usando usuário e senha para acesso remoto.
+
+Em seguida, informar na tela o IP Privado. Essa informação também é usada na próxima etapa.
+O script deve partir então para criar uma segunda instância. Agora há uma diferença. As seguintes ações devem ser realizadas na criação desse novo servidor:
+
+    Os pacotes cliente do MySQL deve ser instalados.
+    Uma pilha LAMP (Linux Apache MySQL PHP) deve ser configurada.
+    O código do WordPress deve ser baixado e descompactado. Um arquivo de configuração com as informações do banco da primeira instância deve ser criado.
+    O WordPress deve ser instalado no Apache.
+
+Você pode usar o nginx se assim desejar.
+Abaixo, um exemplo da invocação e saídas produzidas.
+
+$ ./wordpress.sh nomedachave usuario senha
+Criando servidor de Banco de Dados...
+IP Privado do Banco de Dados: 172.31.64.108
+
+Criando servidor de Aplicação...
+IP Público do Servidor de Aplicação: 100.25.42.191      
+
+Acesse http://100.25.42.191/wordpress para finalizar a configuração.
+
+ATENÇÃO: A configuração que deve restar a ser feita só pode envolver a criação do usuário para o WordPress e a definição do nome do site. Informações do Banco de Dados não devem ser requisitadas, pois precisam ser configuradas no arquivo de configuração do WordPress.
