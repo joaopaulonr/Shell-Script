@@ -64,4 +64,4 @@ IP Público do Servidor de Aplicação: 100.25.42.191
 
 Acesse http://100.25.42.191/wordpress para finalizar a configuração.
 
-ATENÇÃO: A configuração que deve restar a ser feita só pode envolver a criação do usuário para o WordPress e a definição do nome do site. Informações do Banco de Dados não devem ser requisitadas, pois precisam ser configuradas no arquivo de configuração do WordPress.
+ATENÇÃO: A configuração que deve restar a ser feita só pode envolver a criação do usuário para o WordPress e a definição do nome do site. Informações do Banco de Dados não devem ser requisitadas, pois precisam ser configuradas no arquivo de configuração do WordPress.a
