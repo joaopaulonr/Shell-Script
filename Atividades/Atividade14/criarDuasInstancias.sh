@@ -37,7 +37,7 @@ IPPUB1=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicIp
 IPPRIV1=$(aws ec2 describe-instances --query "Reservations[].Instances[].PrivateIpAddress" --instance-id ${InstanceId} --output text)
 #verifica se a Instância esta em execução.
 while [[ $STATUS != "running" ]]; do
-    sleep 2
+    sleep 1
     STATUS=$(aws ec2 describe-instances --instance-id $InstanceId --query "Reservations[0].Instances[0].State.Name" --output text)
 done
 #Print do IP privado.
@@ -64,7 +64,7 @@ InstanceId2=$(grep "InstanceId" aux2.txt | tr -d '"' | tr -d ','  | cut -d ":" -
 IPPUB2=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicIpAddress" --instance-id ${InstanceId2} --output text)
 #verifica se a Instância está em execução.
 while [[ $STATUS2 != "running" ]]; do
-    sleep 2
+    sleep 1
     STATUS2=$(aws ec2 describe-instances --instance-id $InstanceId2 --query "Reservations[].Instances[].State.Name" --output text)
 done
 #Print do IP público da segunda instância.
