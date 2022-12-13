@@ -1,7 +1,7 @@
 #!/bin/bash
 #Parâmetro-para-a-inserção-da-chave-de-acesso.
-KEY=$1;USER=$2;PASS=$3;
-echo "Criando servidor de banco de dados..."
+KEY=$1;USER=$2;PASS=$3,
+echo "Criando Servidor de Banco de Dados..."
 #Variáveis de uso para o script.
 ISO="ami-052efd3df9dad4825"
 IPMAQUINA=$(echo "$(wget -qO- http://checkip.amazonaws.com/?_x_tr_sch=http&_x_tr_sl=auto&_x_tr_tl=pt&_x_tr_hl=pt-BR&_x_tr_pto=wapp)/32")
@@ -37,13 +37,15 @@ IPPUB1=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicIp
 IPPRIV1=$(aws ec2 describe-instances --query "Reservations[].Instances[].PrivateIpAddress" --instance-id ${InstanceId} --output text)
 #verifica se a Instância esta em execução.
 while [[ $STATUS != "running" ]]; do
-    sleep 1
-    STATUS=$(aws ec2 describe-instances --instance-id $InstanceId --query "Reservations[].Instances[].State.Name" --output text)
+    sleep 2
+    STATUS=$(aws ec2 describe-instances --instance-id $InstanceId --query "Reservations[0].Instances[0].State.Name" --output text)
 done
-#Print do IP privado.
-echo "IP privado ${IPPRIV1}"
+echo "Servidor de Banco de Dados Criado com sucesso!"
+sleep 2
+clear
 ###################################
-echo "Criando servidor de Aplicação..."
+echo "Criando Servidor de Aplicação..."
+sleep 5
 #script para a criação do user data e do arquivo de manutenção para o mysql client.
 cat<<EOF >  mysqlcliente.sh
 #!/bin/bash
@@ -64,9 +66,26 @@ InstanceId2=$(grep "InstanceId" aux2.txt | tr -d '"' | tr -d ','  | cut -d ":" -
 IPPUB2=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicIpAddress" --instance-id ${InstanceId2} --output text)
 #verifica se a Instância está em execução.
 while [[ $STATUS2 != "running" ]]; do
-    sleep 1
+    sleep 2
     STATUS2=$(aws ec2 describe-instances --instance-id $InstanceId2 --query "Reservations[].Instances[].State.Name" --output text)
 done
+echo "Servidor de Aplicação Criado om Sucesso!"
 #Print do IP público da segunda instância.
-echo "IP publico do servidor de aplicação : ${IPPUB2}"
-rm -f aux.txt aux2.txt
+for ((i = 30; i >= 1; i--)) do
+clear
+echo "Espere alguns segundos para a configuração dos serviços." 
+echo "Finalizando em ${i}s."
+sleep 0.33
+clear
+echo "Espere alguns segundos para a configuração dos serviços.." 
+echo "Finalizando em ${i}s.."
+sleep 0.33
+clear
+echo "Espere alguns segundos para a configuração dos serviços..." 
+echo "Finalizando em ${i}s..."
+sleep 0.33
+done
+clear
+echo "IP Privado do Banco de Dados: ${IPPRIV1}"
+echo "IP Público do Servidor de Aplicação: ${IPPUB2}"
+rm -f aux.txt aux2.txt mysqlconf.sh mysqlcliente.sh
