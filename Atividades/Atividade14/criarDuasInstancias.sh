@@ -1,6 +1,6 @@
 #!/bin/bash
 #Parâmetro-para-a-inserção-da-chave-de-acesso.
-KEY=$1;USER=$2;PASS=$3,
+KEY=$1;USER=$2;PASS=$3;
 echo "Criando servidor de banco de dados..."
 #Variáveis de uso para o script.
 ISO="ami-052efd3df9dad4825"
