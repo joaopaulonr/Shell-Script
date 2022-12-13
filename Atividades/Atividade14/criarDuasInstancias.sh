@@ -38,7 +38,7 @@ IPPRIV1=$(aws ec2 describe-instances --query "Reservations[].Instances[].Private
 #verifica se a Instância esta em execução.
 while [[ $STATUS != "running" ]]; do
     sleep 1
-    STATUS=$(aws ec2 describe-instances --instance-id $InstanceId --query "Reservations[0].Instances[0].State.Name" --output text)
+    STATUS=$(aws ec2 describe-instances --instance-id $InstanceId --query "Reservations[].Instances[].State.Name" --output text)
 done
 #Print do IP privado.
 echo "IP privado ${IPPRIV1}"
