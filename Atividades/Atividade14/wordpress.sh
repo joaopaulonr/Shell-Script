@@ -43,11 +43,9 @@ done
 echo "Servidor de Banco de Dados Criado com sucesso!"
 sleep 2
 clear
-
-
 echo "Criando Servidor de Aplicação..."
 sleep 5
-#script para a criação do user data e do arquivo de manutenção para o mysql client.
+#script para a configuração da pilha LAMP. utilizei o tutorial https://pt.linux-console.net/?p=457#gsc.tab=0 para a configuração.
 cat<<EOF >  aplicacao.sh
 #!/bin/bash
 apt update -y
@@ -105,6 +103,7 @@ echo "Finalizando em ${i}s..."
 sleep 0.33
 done
 clear
+#print dos ips e link de acesso ao final da configuração do wordpress.
 echo "IP Privado do Banco de Dados: ${IPPRIV1}"
 echo "IP Público do Servidor de Aplicação: ${IPPUB2}"
 echo "Acesse http://$IPPUB2/wordpress para finalizar a configuração."
