@@ -68,11 +68,11 @@ sudo cp -fr /home/ubuntu/wordpress /var/www/html/
 chown -R www-data:www-data /var/www/html/wordpress
 find /var/www/html/wordpress/ -type d -exec chmod 750 {} \\;
 find /var/www/html/wordpress/ -type f -exec chmod 640 {} \\;
-cat <<FOE > /etc/apache2/sites-available/wordpress.conf
+cat <<JOE > /etc/apache2/sites-available/wordpress.conf
 <Directory /var/www/html/wordpress/>
     AllowOverride All
 </Directory>
-FOE
+JOE
 a2enmod rewrite
 a2ensite wordpress
 systemctl restart apache2
