@@ -13,7 +13,7 @@ SECGRUPID=$(aws ec2 describe-security-groups --group-names  "Script-Wordpress-Gr
 aws ec2 authorize-security-group-ingress --group-id ${SECGRUPID} --protocol tcp --port 80 --cidr 0.0.0.0/0 > /dev/null
 aws ec2 authorize-security-group-ingress --group-id ${SECGRUPID} --protocol tcp --port 22 --cidr ${IPMAQUINA} > /dev/null
 aws ec2 authorize-security-group-ingress --group-id ${SECGRUPID} --protocol tcp --port 3306 --source-group ${SECGRUPID} > /dev/null
-#script para a configuração do servidor mysql.
+#Script para a configuração do servidor mysql.
 cat <<EOF > mysqlconf.sh
 #!/bin/bash
 #Update do apt.
@@ -35,7 +35,7 @@ aws ec2 run-instances --image-id ${ISO} --instance-type t2.micro --key-name ${KE
 InstanceId=$(grep "InstanceId" aux.txt | tr -d '"' | tr -d ','  | cut -d ":" -f2)
 IPPUB1=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicIpAddress" --instance-id ${InstanceId} --output text)
 IPPRIV1=$(aws ec2 describe-instances --query "Reservations[].Instances[].PrivateIpAddress" --instance-id ${InstanceId} --output text)
-#verifica se a Instância esta em execução.
+#Verifica se a Instância esta em execução.
 while [[ $STATUS != "running" ]]; do
     sleep 2
     STATUS=$(aws ec2 describe-instances --instance-id $InstanceId --query "Reservations[0].Instances[0].State.Name" --output text)
@@ -45,7 +45,7 @@ sleep 2
 clear
 echo "Criando Servidor de Aplicação..."
 sleep 5
-#script para a configuração da pilha LAMP. utilizei o tutorial https://pt.linux-console.net/?p=457#gsc.tab=0 para a configuração.
+#Script para a configuração da pilha LAMP. utilizei o tutorial https://pt.linux-console.net/?p=457#gsc.tab=0 para a configuração.
 cat<<EOF >  aplicacao.sh
 #!/bin/bash
 apt update -y
@@ -81,13 +81,13 @@ EOF
 aws ec2 run-instances --image-id ${ISO} --instance-type t2.micro --key-name ${KEY} --subnet-id ${SUBNET} --security-group-ids ${SECGRUPID} --user-data file://aplicacao.sh >> aux2.txt
 InstanceId2=$(grep "InstanceId" aux2.txt | tr -d '"' | tr -d ','  | cut -d ":" -f2)
 IPPUB2=$(aws ec2 describe-instances --query "Reservations[].Instances[].PublicIpAddress" --instance-id ${InstanceId2} --output text)
-#verifica se a Instância está em execução.
+#Verifica se a Instância está em execução.
 while [[ $STATUS2 != "running" ]]; do
     sleep 2
     STATUS2=$(aws ec2 describe-instances --instance-id $InstanceId2 --query "Reservations[].Instances[].State.Name" --output text)
 done
 echo "Servidor de Aplicação Criado om Sucesso!"
-#Print do IP público da segunda instância.
+#Contador.
 for ((i = 90; i >= 1; i--)) do
 clear
 echo "Espere alguns segundos para a configuração dos serviços." 
@@ -103,7 +103,7 @@ echo "Finalizando em ${i}s..."
 sleep 0.33
 done
 clear
-#print dos ips e link de acesso ao final da configuração do wordpress.
+#Print dos ips e link de acesso ao final da configuração do wordpress.
 echo "IP Privado do Banco de Dados: ${IPPRIV1}"
 echo "IP Público do Servidor de Aplicação: ${IPPUB2}"
 echo "Acesse http://$IPPUB2/wordpress para finalizar a configuração."
